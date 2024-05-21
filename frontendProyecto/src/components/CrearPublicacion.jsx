@@ -18,7 +18,8 @@
 
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { toast } from "react-toastify"; // Import toast from react-toastify
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CrearPublicacion = () => {
   const [formData, setFormData] = useState({
@@ -111,10 +112,14 @@ const CrearPublicacion = () => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant="primary" onClick={handleSubmit} className="mt-3">
+          {" "}
+          {/* Added className for margin top */}
           Confirmar
         </Button>
       </Form>
+      {/* Add ToastContainer component */}
+      <ToastContainer />
     </div>
   );
 };
