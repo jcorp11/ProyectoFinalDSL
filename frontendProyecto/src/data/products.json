@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Product 1",
+        "description": "Description of product 1",
+        "price": 10.99,
+        "imageUrl": "https://example.com/product1.jpg",
+        "stock": 20,
+        "category": "Category A",
+        "available": true
+    },
+    {
+        "id": 2,
+        "title": "Product 2",
+        "description": "Description of product 2",
+        "price": 15.99,
+        "imageUrl": "https://example.com/product2.jpg",
+        "stock": 15,
+        "category": "Category B",
+        "available": true
+    },
+    {
+        "id": 3,
+        "title": "Product 3",
+        "description": "Description of product 3",
+        "price": 20.99,
+        "imageUrl": "https://example.com/product3.jpg",
+        "stock": 25,
+        "category": "Category A",
+        "available": false
+    },
+    {
+        "id": 4,
+        "title": "Product 4",
+        "description": "Description of product 4",
+        "price": 25.99,
+        "imageUrl": "https://example.com/product4.jpg",
+        "stock": 10,
+        "category": "Category C",
+        "available": true
+    },
+    {
+        "id": 5,
+        "title": "Product 5",
+        "description": "Description of product 5",
+        "price": 30.99,
+        "imageUrl": "https://example.com/product5.jpg",
+        "stock": 30,
+        "category": "Category B",
+        "available": true
+    },
+    {
+        "id": 6,
+        "title": "Product 6",
+        "description": "Description of product 6",
+        "price": 18.99,
+        "imageUrl": "https://example.com/product6.jpg",
+        "stock": 12,
+        "category": "Category A",
+        "available": false
+    },
+    {
+        "id": 7,
+        "title": "Product 7",
+        "description": "Description of product 7",
+        "price": 22.99,
+        "imageUrl": "https://example.com/product7.jpg",
+        "stock": 18,
+        "category": "Category C",
+        "available": true
+    },
+    {
+        "id": 8,
+        "title": "Product 8",
+        "description": "Description of product 8",
+        "price": 27.99,
+        "imageUrl": "https://example.com/product8.jpg",
+        "stock": 22,
+        "category": "Category B",
+        "available": true
+    },
+    {
+        "id": 9,
+        "title": "Product 9",
+        "description": "Description of product 9",
+        "price": 35.99,
+        "imageUrl": "https://example.com/product9.jpg",
+        "stock": 25,
+        "category": "Category A",
+        "available": true
+    },
+    {
+        "id": 10,
+        "title": "Product 10",
+        "description": "Description of product 10",
+        "price": 40.99,
+        "imageUrl": "https://example.com/product10.jpg",
+        "stock": 20,
+        "category": "Category C",
+        "available": false
+    }
+]

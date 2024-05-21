@@ -38,13 +38,7 @@ const MisCompras = () => {
   };
 
   if (loading) {
-    return (
-      <div className="text-center">
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return <div className="text-center">Loading...</div>;
   }
 
   return (

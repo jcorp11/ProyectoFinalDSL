@@ -2,20 +2,14 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import MisCompras from "../components/MisCompras";
 import DatosUsuario from "../components/DatosUsuario";
+import CrearPublicacion from "../components/CrearPublicacion";
+import Usuarios from "../components/Usuarios";
+import ModificarPublicacion from "../components/ModificarPublicacion"; // Import the ModificarPublicacion component
 
 const Perfil = () => {
-  const [activeComponent, setActiveComponent] = useState("mis-compras");
+  const [activeComponent, setActiveComponent] = useState("datos-usuario");
 
-  const renderComponent = () => {
-    switch (activeComponent) {
-      case "mis-compras":
-        return <MisCompras />;
-      case "datos-usuario":
-        return <DatosUsuario />;
-      default:
-        return <MisCompras />;
-    }
-  };
+  const isAdmin = true; // Hardcoded isAdmin to true for testing locally
 
   return (
     <Container>
@@ -35,9 +29,41 @@ const Perfil = () => {
             >
               Datos de Usuario
             </Button>
+            {isAdmin && (
+              <Button
+                variant="link"
+                onClick={() => setActiveComponent("crear-publicacion")}
+              >
+                Crear Publicación
+              </Button>
+            )}
+            {isAdmin && (
+              <Button
+                variant="link"
+                onClick={() => setActiveComponent("usuarios")}
+              >
+                Usuarios
+              </Button>
+            )}
+            {isAdmin && (
+              <Button
+                variant="link"
+                onClick={() => setActiveComponent("modificar-publicaciones")}
+              >
+                Modificar Publicaciones
+              </Button>
+            )}
           </div>
         </Col>
-        <Col md={9}>{renderComponent()}</Col>
+        <Col md={9}>
+          {activeComponent === "mis-compras" && <MisCompras />}
+          {activeComponent === "datos-usuario" && <DatosUsuario />}
+          {activeComponent === "crear-publicacion" && <CrearPublicacion />}
+          {activeComponent === "usuarios" && <Usuarios />}
+          {isAdmin && activeComponent === "modificar-publicaciones" && (
+            <ModificarPublicacion />
+          )}
+        </Col>
       </Row>
     </Container>
   );
