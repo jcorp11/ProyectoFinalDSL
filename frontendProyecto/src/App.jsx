@@ -1,12 +1,12 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
-import Navbar from './components/Navbar'
+import {Home} from "./views/Home";
 
 function App() {
 
   return (
     <>
-      <Navbar />
+      <Home />
       {/* <Routes>
         <Route path="/" element={token ? <HomePage /> : <Navigate to="/login" />} />
         <Route
