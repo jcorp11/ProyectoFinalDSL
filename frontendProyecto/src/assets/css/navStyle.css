@@ -1,0 +1,28 @@
+nav {
+  height: 7rem;
+  border: solid 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.buscador{
+  width: 20rem;
+  text-align: center;
+  border-radius: 2rem;
+}
+.icono{
+  color: black;
+}
+nav a{
+  text-decoration: none;
+  color: red;
+}
+.opciones{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 15rem;
+}
+.notActive{
+  color: black;
+}
