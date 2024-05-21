@@ -6,7 +6,6 @@ import { LoginPage } from "./views/LoginPage";
 function App() {
   return (
     <>
-      <Home />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
@@ -16,7 +15,6 @@ function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/vistadetalle" element={<VistaDetalle />} /> */}
       </Routes>
-      ;
     </>
   );
 }
