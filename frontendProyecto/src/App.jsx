@@ -2,10 +2,12 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { Home } from "./views/Home";
 import { LoginPage } from "./views/LoginPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
