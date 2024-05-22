@@ -9,7 +9,7 @@ const ProductProvider = ({ children }) => {
   const [productosData, setProductosData] = useState(productos)
   const [productosCarrito, setProductosCarrito] = useState([])
   const [listaProductos, setListaProductos] = useState([])
-  const [PrecioTotal, setPrecioTotal] = useState([])
+  const [PrecioTotal, setPrecioTotal] = useState(0)
 
   useEffect(() => {
 

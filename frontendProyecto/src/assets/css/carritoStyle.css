@@ -1,0 +1,82 @@
+.containerCarrito{
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  height: 35rem;
+  padding: 0;
+}
+.containerCarrito h1{
+  height: 10%;
+  font-size: 2rem;
+}
+.elementosCarrito{
+  height: 70%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  overflow-y: scroll;
+
+}
+.totalIrAPagar{
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+.totalIrAPagar button{
+  background-color: #198754;
+  border: none;
+  height: 100%;
+  color: white;
+  border-radius: 0.2rem;
+}
+.itemsCarrito{
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+}
+.itemsCarrito-img{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.itemsCarrito-img img{
+  height: 100%;
+}
+.itemsCarrito-precioButtons{
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  font-weight: bold;
+}
+.itemsCarrito-precioButtons p{
+  margin: 0;
+  font-size: 1.2rem;
+}
+.itemsCarrito-precioButtons p:first-child{
+  color: green;
+}
+.itemsCarrito-precioButtons button{
+  height: 2.5rem;
+  width: 2rem;
+  border-radius: 0.2rem; 
+  border: none;
+  color: white;
+}
+.itemsCarrito-precioButtons button:nth-child(2){
+  background: #DC3545;
+}
+.itemsCarrito-precioButtons button:nth-child(4){
+  background: #0D6EFD;
+}
+.carroVacio{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
