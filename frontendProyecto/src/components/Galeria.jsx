@@ -20,5 +20,3 @@ const Galeria = () => {
 }
 
 export default Galeria
-
-/* imagenUrl, titulo, descripcion, precio */

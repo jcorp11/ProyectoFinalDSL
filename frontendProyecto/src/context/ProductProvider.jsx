@@ -9,7 +9,7 @@ const ProductProvider = ({ children }) => {
   const [productosData, setProductosData] = useState(productos)
   const [productosCarrito, setProductosCarrito] = useState([])
   const [listaProductos, setListaProductos] = useState([])
-  const [PrecioTotal, setPrecioTotal] = useState([])
+  const [precioTotal, setPrecioTotal] = useState(0)
 
   useEffect(() => {
 
@@ -25,7 +25,7 @@ const ProductProvider = ({ children }) => {
   }, [productosCarrito])
 
   return (
-    <productosContext.Provider value={{ productosData, setProductosData, productosCarrito, setProductosCarrito, PrecioTotal, listaProductos, setListaProductos }}>
+    <productosContext.Provider value={{ productosData, setProductosData, productosCarrito, setProductosCarrito, precioTotal, listaProductos, setListaProductos }}>
       {children}
     </productosContext.Provider>
   )
