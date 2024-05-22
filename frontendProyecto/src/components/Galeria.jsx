@@ -2,6 +2,7 @@ import CardGaleria from "./CardGaleria"
 import { productos } from '../assets/productos.js'
 
 const Galeria = () => {
+  
   return (
     <div className="galeria container">
       <div className="row">
@@ -9,10 +10,7 @@ const Galeria = () => {
           return (
             <CardGaleria
               key={producto.id}
-              imagenUrl={producto.imagenUrl}
-              titulo={producto.titulo}
-              descripcion={producto.descripcion}
-              precio={producto.precio}
+              producto = {producto}
             />
           )
         })}
