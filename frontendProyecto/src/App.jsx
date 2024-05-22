@@ -4,6 +4,7 @@ import { Home } from "./views/Home";
 import { LoginPage } from "./views/LoginPage";
 import { RegistrarPage } from "./views/RegistrarPage";
 import Navbar from "./components/Navbar";
+import Carrito from "./components/Carrito";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/registrar" element={<RegistrarPage />} />
+        <Route path="/register" element={<RegistrarPage />} />
 
         {/* <Route path="/perfil" element={<Perfil />} />
         <Route path="/carrito" element={<Carrito />} />
