@@ -4,7 +4,7 @@ import MisCompras from "../components/MisCompras";
 import DatosUsuario from "../components/DatosUsuario";
 import CrearPublicacion from "../components/CrearPublicacion";
 import Usuarios from "../components/Usuarios";
-import ModificarPublicacion from "../components/ModificarPublicacion"; // Import the ModificarPublicacion component
+import ModificarPublicacion from "../components/ModificarPublicacion";
 
 const Perfil = () => {
   const [activeComponent, setActiveComponent] = useState("datos-usuario");
@@ -60,7 +60,7 @@ const Perfil = () => {
           {activeComponent === "datos-usuario" && <DatosUsuario />}
           {activeComponent === "crear-publicacion" && <CrearPublicacion />}
           {activeComponent === "usuarios" && <Usuarios />}
-          {isAdmin && activeComponent === "modificar-publicaciones" && (
+          {activeComponent === "modificar-publicaciones" && (
             <ModificarPublicacion />
           )}
         </Col>
