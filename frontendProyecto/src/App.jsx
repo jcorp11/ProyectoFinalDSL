@@ -28,10 +28,6 @@ function App() {
             </Validacion>
           }
         />
-
-        {/* <Route path="/perfil" element={<Perfil />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/vistadetalle" element={<VistaDetalle />} /> */}
       </Routes>
     </ProductProvider>
   );
