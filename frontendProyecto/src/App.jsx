@@ -5,7 +5,9 @@ import { LoginPage } from "./views/LoginPage";
 import { RegistrarPage } from "./views/RegistrarPage";
 import Navbar from "./components/Navbar";
 import Carrito from "./components/Carrito";
-import ProductProvider from './context/ProductProvider'
+import ProductProvider from "./context/ProductProvider";
+import Perfil from "./views/Perfil";
+import Validacion from "./components/Validacion";
 
 function App() {
   return (
@@ -16,12 +18,22 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegistrarPage />} />
         <Route path="/cart" element={<Carrito />} />
+        <Route path="/perfil" element={<Perfil />} />
+
+        <Route
+          path="/perfil2"
+          element={
+            <Validacion requireRoles={"admin"}>
+              <Carrito />
+            </Validacion>
+          }
+        />
 
         {/* <Route path="/perfil" element={<Perfil />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/vistadetalle" element={<VistaDetalle />} /> */}
       </Routes>
-    </ ProductProvider>
+    </ProductProvider>
   );
 }
 
