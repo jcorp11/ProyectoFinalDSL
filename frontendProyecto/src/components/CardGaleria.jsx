@@ -4,6 +4,7 @@ import '../assets/css/cardGaleriaStyle.css'
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { productosContext } from '../context/ProductProvider';
+import { formatoPrecio } from '../js/formatearMoneda.js';
 
 const CardGaleria = ({producto}) => {
 
@@ -40,7 +41,7 @@ const CardGaleria = ({producto}) => {
         </ListGroup.Item>
       </ListGroup>
       <Card.Body className='priceAndButtons'>
-        <h5>{producto.precio}</h5>
+        <h5>{formatoPrecio.format(producto.precio)}</h5>
         <div className="buttons">
           <button onClick={setNavigate}>
             Ver Más 👀

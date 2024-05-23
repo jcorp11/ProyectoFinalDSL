@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useContext } from 'react'
 import { productosContext } from '../context/ProductProvider';
 import '../assets/css/carritoStyle.css'
+import { formatoPrecio } from '../js/formatearMoneda.js';
 
 const ItemsCarrito = ({productoAgregado, cantidadProductos}) => {
 
@@ -42,7 +43,7 @@ const ItemsCarrito = ({productoAgregado, cantidadProductos}) => {
           <h4>{productoAgregado.titulo}</h4>
         </div>
         <div className='itemsCarrito-precioButtons'>
-          <p>{productoAgregado.precio*numeroProductos}</p>
+          <p>{formatoPrecio.format(productoAgregado.precio*numeroProductos)}</p>
           <button onClick={()=>{
             incrementoYDecremento("restar")
           }}>

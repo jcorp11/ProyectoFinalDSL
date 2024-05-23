@@ -1,21 +1,27 @@
 import CardGaleria from "./CardGaleria";
-import { productos } from "../assets/productos.js";
-import useFetch from "../Hooks/useFetch";
+import { useContext } from "react";
+import { productosContext } from "../context/ProductProvider";
+
 
 const Galeria = () => {
-  const { data, error, loading } = useFetch("");
 
-  console.log(data);
+  const { productosData, loading, error } = useContext(productosContext);
 
   return (
     <div className="galeria container">
-      <div className="row">
-        {productos.map((producto) => {
-          return <CardGaleria key={producto.id} producto={producto} />;
-        })}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <div className="row">
+          {productosData.map((producto) => (
+            <CardGaleria key={producto.id} producto={producto} />
+          ))}
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
 export default Galeria;
