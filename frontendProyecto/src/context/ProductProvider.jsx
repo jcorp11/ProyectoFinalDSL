@@ -1,15 +1,24 @@
 import React, { useEffect } from 'react'
 import { createContext } from 'react'
-import { productos } from '../assets/productos.js'
 import { useState } from 'react';
+import useFetch from '../Hooks/useFetch.js'
 
 export const productosContext = createContext();
 
 const ProductProvider = ({ children }) => {
-  const [productosData, setProductosData] = useState(productos)
+  const [productosData, setProductosData] = useState([])
   const [productosCarrito, setProductosCarrito] = useState([])
   const [listaProductos, setListaProductos] = useState([])
   const [precioTotal, setPrecioTotal] = useState(0)
+  const {data, loading, error} = useFetch("/productos.json")
+  const [dataOriginal, setDataOriginal] = useState([])
+
+  useEffect(() => {
+    if (data) {
+      setProductosData(data);
+      setDataOriginal(data);
+    }
+  }, [data]);
 
   useEffect(() => {
 
@@ -25,7 +34,7 @@ const ProductProvider = ({ children }) => {
   }, [productosCarrito])
 
   return (
-    <productosContext.Provider value={{ productosData, setProductosData, productosCarrito, setProductosCarrito, precioTotal, listaProductos, setListaProductos }}>
+    <productosContext.Provider value={{ productosData, setProductosData, productosCarrito, setProductosCarrito, precioTotal, listaProductos, setListaProductos, loading, dataOriginal, error }}>
       {children}
     </productosContext.Provider>
   )

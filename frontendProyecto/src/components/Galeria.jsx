@@ -1,11 +1,11 @@
 import CardGaleria from "./CardGaleria";
 import { useContext } from "react";
-import { galeriaContext } from "../context/GaleriaProvider.jsx";
+import { productosContext } from "../context/ProductProvider";
 
 
 const Galeria = () => {
 
-  const { galeriaData, loading, error } = useContext(galeriaContext);
+  const { productosData, loading, error } = useContext(productosContext);
 
   return (
     <div className="galeria container">
@@ -15,7 +15,7 @@ const Galeria = () => {
         <p>Error: {error.message}</p>
       ) : (
         <div className="row">
-          {galeriaData.map((producto) => (
+          {productosData.map((producto) => (
             <CardGaleria key={producto.id} producto={producto} />
           ))}
         </div>

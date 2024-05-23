@@ -3,11 +3,10 @@ import "../assets/css/navStyle.css";
 import { NavLink } from "react-router-dom";
 import { productosContext } from "../context/ProductProvider";
 import Validacion from "./Validacion";
-import { galeriaContext } from "../context/GaleriaProvider.jsx";
+import { formatoPrecio } from '../js/formatearMoneda.js';
 
 const Navbar = () => {
-  const { precioTotal } = useContext(productosContext);
-  const { setGaleriaData, dataOriginal } = useContext(galeriaContext);
+  const { precioTotal, dataOriginal, setProductosData  } = useContext(productosContext);
   const [inputBuscador, setInputBuscador] = useState("");
 
   // Función de debounce
@@ -27,12 +26,12 @@ const Navbar = () => {
     () =>
       debounce((inputValue) => {
         if (inputValue === "") {
-          setGaleriaData(dataOriginal);
+          setProductosData(dataOriginal);
         } else {
           const filtro = dataOriginal.filter((element) =>
             element.titulo.toLowerCase().includes(inputValue)
           );
-          setGaleriaData(filtro);
+          setProductosData(filtro);
         }
       }, 300), // 300ms de espera antes de llamar a la función
     [dataOriginal]
@@ -72,7 +71,7 @@ const Navbar = () => {
           Registrarse
         </NavLink>
         <NavLink className={isActiveNav} to="/cart">
-          Carrito 🛒 {precioTotal}
+          Carrito 🛒 {formatoPrecio.format(precioTotal)}
         </NavLink>
       </div>
     </nav>

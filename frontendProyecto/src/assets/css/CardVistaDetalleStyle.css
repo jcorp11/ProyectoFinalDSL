@@ -1,0 +1,42 @@
+.containerDetails{
+  display: flex;
+  margin-top: 3rem;
+  height: 30rem;
+  padding: 0;
+  border: solid 1px rgba(0, 0, 0, 0.103);
+}
+.imgContainer{
+  width: 40%;
+}
+.imgContainer img{
+  width: 100%;
+  height: 100%;
+}
+.detailsContainer{
+  width: 60%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.details{
+  display: flex;
+  flex-direction: column;
+}
+.details p{
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+.priceAndButtonDetails button{
+  background-color: #DC3545;
+  border: none;
+  height: 3rem;
+  width: 6rem;
+  color: white;
+  border-radius: 0.3rem;
+}
+.priceAndButtonDetails{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

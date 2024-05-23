@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { productosContext } from '../context/ProductProvider'
 import ItemsCarrito from '../components/ItemsCarrito';
 import '../assets/css/carritoStyle.css'
+import { formatoPrecio } from '../js/formatearMoneda.js';
 
 const Carrito = () => {
 
@@ -9,7 +10,7 @@ const Carrito = () => {
 
   
   function pagar(){
-    alert(`Se acaba de realizar un pago por ${precioTotal} pesos.`)
+    alert(`Se acaba de realizar un pago por ${formatoPrecio.format(precioTotal)} pesos.`)
     setListaProductos([])
     setProductosCarrito([])
   }
@@ -35,7 +36,7 @@ const Carrito = () => {
           )}
         </div>
         <div className='totalIrAPagar'>
-          <h2>{precioTotal}</h2>
+          <h2>{formatoPrecio.format(precioTotal)}</h2>
           <button onClick={pagar}>Ir A Pagar</button>
         </div>
       </div>
