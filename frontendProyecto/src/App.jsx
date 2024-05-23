@@ -18,10 +18,6 @@ function App() {
         <Route path="/register" element={<RegistrarPage />} />
         <Route path="/cart" element={<Carrito />} />
         <Route path="/perfil" element={<Perfil />} />
-
-        {/* <Route path="/perfil" element={<Perfil />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/vistadetalle" element={<VistaDetalle />} /> */}
       </Routes>
     </ ProductProvider>
   );
