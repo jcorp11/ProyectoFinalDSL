@@ -6,6 +6,7 @@ import { RegistrarPage } from "./views/RegistrarPage";
 import Navbar from "./components/Navbar";
 import Carrito from "./components/Carrito";
 import ProductProvider from './context/ProductProvider'
+import Perfil from './views/Perfil'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegistrarPage />} />
         <Route path="/cart" element={<Carrito />} />
+        <Route path="/perfil" element={<Perfil />} />
 
         {/* <Route path="/perfil" element={<Perfil />} />
         <Route path="/carrito" element={<Carrito />} />
