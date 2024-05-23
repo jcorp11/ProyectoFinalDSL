@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Spinner, Button, Modal, ListGroup } from "react-bootstrap";
+import { Form, Button, Modal, ListGroup } from "react-bootstrap";
+import styles from "./DatosUsuario.module.css";
 
 const DatosUsuario = () => {
   const [userData, setUserData] = useState({ email: "", addresses: [] });
@@ -17,7 +18,7 @@ const DatosUsuario = () => {
         addresses: ["123 Main St"],
       });
       setLoading(false);
-    }, 1000);
+    }, 100);
   }, []);
 
   const handleAddAddress = () => {
@@ -40,25 +41,34 @@ const DatosUsuario = () => {
   }
 
   return (
-    <>
+    <div className={styles["datos-usuario-container"]}>
+      <h3>Datos de Usuario</h3>
       <Form>
         <Form.Group controlId="formEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" value={userData.email} readOnly />
-          <Button variant="link" onClick={() => setShowEmailModal(true)}>
-            Edit Email
+          <Button
+            variant="link"
+            className={styles["link-button"]}
+            onClick={() => setShowEmailModal(true)}
+          >
+            Editar Email
           </Button>
         </Form.Group>
 
         <Form.Group controlId="formAddresses">
-          <Form.Label>Direcciónes</Form.Label>
+          <Form.Label>Direcciones</Form.Label>
           <ListGroup>
             {userData.addresses.map((address, index) => (
               <ListGroup.Item key={index}>{address}</ListGroup.Item>
             ))}
           </ListGroup>
-          <Button variant="link" onClick={() => setShowAddressModal(true)}>
-            Add Address
+          <Button
+            variant="link"
+            className={styles["link-button"]}
+            onClick={() => setShowAddressModal(true)}
+          >
+            Agregar Dirección
           </Button>
         </Form.Group>
       </Form>
@@ -66,11 +76,11 @@ const DatosUsuario = () => {
       {/* Address Modal */}
       <Modal show={showAddressModal} onHide={() => setShowAddressModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Address</Modal.Title>
+          <Modal.Title> Agregar Dirección </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="formNewAddress">
-            <Form.Label>New Address</Form.Label>
+            <Form.Label>Dirección Nueva</Form.Label>
             <Form.Control
               type="text"
               value={newAddress}
@@ -83,10 +93,10 @@ const DatosUsuario = () => {
             variant="secondary"
             onClick={() => setShowAddressModal(false)}
           >
-            Close
+            Cerrar
           </Button>
           <Button variant="primary" onClick={handleAddAddress}>
-            Save Changes
+            Guardar
           </Button>
         </Modal.Footer>
       </Modal>
@@ -94,11 +104,11 @@ const DatosUsuario = () => {
       {/* Email Modal */}
       <Modal show={showEmailModal} onHide={() => setShowEmailModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Email</Modal.Title>
+          <Modal.Title>Editar Email</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="formNewEmail">
-            <Form.Label>New Email</Form.Label>
+            <Form.Label>Nuevo Email</Form.Label>
             <Form.Control
               type="email"
               value={newEmail}
@@ -108,44 +118,15 @@ const DatosUsuario = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowEmailModal(false)}>
-            Close
+            Cerrar
           </Button>
           <Button variant="primary" onClick={handleEditEmail}>
-            Save Changes
+            Guardar
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };
 
 export default DatosUsuario;
-
-/**
- * Manejo del Estado:
- * - `userData`: Contiene el correo electrónico del usuario y un array de direcciones.
- * - `loading`: Indica si los datos están siendo cargados.
- * - `showAddressModal` y `showEmailModal`: Gestionan la visibilidad de los modales.
- * - `newAddress` y `newEmail`: Contienen los valores de entrada para la nueva dirección y el nuevo correo electrónico.
- *
- * Hook de Efecto:
- * - Simula la obtención de datos del usuario con un `setTimeout` para emular una llamada a una API.
- *
- * Manejadores de Eventos:
- * - `handleAddAddress`: Añade una nueva dirección al array de `addresses` y cierra el modal.
- * - `handleEditEmail`: Actualiza el correo electrónico del usuario y cierra el modal.
- *
- * Renderización Condicional:
- * - Muestra un spinner mientras los datos están siendo cargados.
- * - Renderiza el formulario con los campos de correo electrónico y direcciones.
- * - Incluye botones para abrir los modales para añadir una dirección y editar el correo electrónico.
- *
- * Modales:
- * - Componentes `Modal` de `react-bootstrap` para añadir una nueva dirección y editar el correo electrónico.
- *
- * Resumen:
- * Este componente `DatosUsuario` actualizado permite manejar múltiples direcciones almacenándolas en un array y mostrándolas en un `ListGroup`.
- * Cuando se añade una nueva dirección, se agrega al array, y el usuario puede editar el correo electrónico a través de un modal.
- *
- * Esta configuración utiliza estado local y una simulación de obtención de datos, que más adelante puede ser reemplazada por llamadas reales a la API cuando el backend esté listo.
- */

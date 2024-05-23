@@ -20,6 +20,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "./CrearPublicacion.module.css";
 
 const CrearPublicacion = () => {
   const [formData, setFormData] = useState({
@@ -53,8 +54,8 @@ const CrearPublicacion = () => {
   }
 
   return (
-    <div>
-      <h2>Crear Publicacion</h2>
+    <div className={styles["crearpublicacion-container"]}>
+      <h3>Crear Publicacion</h3>
       <Form>
         <Form.Group controlId="formNombreProducto">
           <Form.Label>Nombre del Producto</Form.Label>

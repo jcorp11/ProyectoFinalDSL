@@ -1,0 +1,23 @@
+/* MisCompras.module.css */
+
+.mis-compras-container {
+  padding: 0rem 0rem; /* Add padding around the component */
+}
+
+.toggleButton {
+    background-color: #ffffff; /* White background */
+    color: #333; /* Dark text color for contrast */
+    border: none; /* Remove border */
+    padding: 0.5rem 1rem; /* Add padding for better spacing */
+    margin: 0.5rem 0; /* Add margin to space out buttons */
+    text-align: left; /* Align text to the left */
+    border-radius: 5px; /* Add slight border radius */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .toggleButton:hover {
+    background-color: #4d4d4d; /* Dark gray background on hover */
+    color: #ffffff; /* White text on hover */
+  }
+  
