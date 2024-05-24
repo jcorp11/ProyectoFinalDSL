@@ -16,15 +16,4 @@
 
 // export default Validacion;
 
-import React from "react";
-import { Navigate } from "react-router-dom";
 
-const Validacion = ({ children, condition }) => {
-  if (!condition) {
-    return null;
-  }
-
-  return children;
-};
-
-export default Validacion;

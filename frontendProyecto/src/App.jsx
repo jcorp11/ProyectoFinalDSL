@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import Carrito from "./components/Carrito";
 import ProductProvider from "./context/ProductProvider";
 import Perfil from "./views/Perfil/Perfil";
-import Validacion from "./components/Validacion";
 import ProductDetails from "./views/ProductDetails";
 import UserProvider from "./context/UserProvider";
 
@@ -23,15 +22,6 @@ function App() {
           <Route path="/cart" element={<Carrito />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/productos/:id" element={<ProductDetails />} />
-
-          <Route
-            path="/perfil2"
-            element={
-              <Validacion requireRoles={"admin"}>
-                <Carrito />
-              </Validacion>
-            }
-          />
         </Routes>
       </UserProvider>
     </ProductProvider>

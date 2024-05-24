@@ -2,11 +2,13 @@ import React, { useState, useContext, useMemo } from "react";
 import "../assets/css/navStyle.css";
 import { NavLink } from "react-router-dom";
 import { productosContext } from "../context/ProductProvider";
-import Validacion from "./Validacion";
+import ValidarInicioDeSesion from "./ValidarInicioDeSesion.jsx";
 import { formatoPrecio } from '../js/formatearMoneda.js';
+import { userContext } from "../context/UserProvider.jsx";
 
 const Navbar = () => {
-  const { precioTotal, dataOriginal, setProductosData  } = useContext(productosContext);
+  const { user, setUser, token, setToken } = useContext(userContext);
+  const { precioTotal, dataOriginal, setProductosData } = useContext(productosContext);
   const [inputBuscador, setInputBuscador] = useState("");
 
   // Función de debounce
@@ -37,6 +39,11 @@ const Navbar = () => {
     [dataOriginal]
   );
 
+  const cerrarSesion = () =>{
+    setToken("");
+    setUser("");
+  }
+
   function filtrarProductos(e) {
     const inputValue = e.target.value.toLowerCase();
     setInputBuscador(inputValue);
@@ -49,11 +56,9 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Validacion condition={true}>
-        <NavLink className="icono" to="/">
-          Icono
-        </NavLink>
-      </Validacion>
+      <NavLink className="icono" to="/">
+        Icono
+      </NavLink>
       <div className="search-container">
         <input
           className="buscador"
@@ -64,15 +69,27 @@ const Navbar = () => {
         />
       </div>
       <div className="opciones">
-        <NavLink className={isActiveNav} to="/login">
-          Iniciar Sesión
-        </NavLink>
-        <NavLink className={isActiveNav} to="/register">
-          Registrarse
-        </NavLink>
+        <ValidarInicioDeSesion condition={token}>
+          <NavLink className={isActiveNav} to="/perfil">
+            <div className="perfil">Perfil</div>
+          </NavLink>
+        </ValidarInicioDeSesion>
+        <ValidarInicioDeSesion condition={!token}>
+          <NavLink className={isActiveNav} to="/login">
+            Iniciar Sesión
+          </NavLink>
+          <NavLink className={isActiveNav} to="/register">
+            Registrarse
+          </NavLink>
+        </ValidarInicioDeSesion>
         <NavLink className={isActiveNav} to="/cart">
           Carrito 🛒 {formatoPrecio.format(precioTotal)}
         </NavLink>
+        <ValidarInicioDeSesion condition={token}>
+          <button className="cerrarSesion" onClick={cerrarSesion}>
+            Cerrar Sesion
+          </button>
+        </ValidarInicioDeSesion>
       </div>
     </nav>
   );
