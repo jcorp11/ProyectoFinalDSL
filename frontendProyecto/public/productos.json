@@ -6,7 +6,8 @@
     "precio": 1199.99,
     "imagenUrl": "https://lacasadelmusico.cl/wp-content/uploads/2023/07/FEN-0144503500-1.jpg.webp",
     "stock": 15,
-    "estado": true
+    "estado": true,
+    "categoria": "Guitarra"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "precio": 649.99,
     "imagenUrl": "https://www.planetmusic.cl/wp-content/uploads/2021/06/Yamaha-P125-Piano-Digital-88-Teclas-Planet-Music-Beatnik-Chile-1200x600-1.jpg",
     "stock": 10,
-    "estado": true
+    "estado": true,
+    "categoria": "Teclados"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "precio": 499.99,
     "imagenUrl": "https://www.urdile.cl/image/cache/catalog/PEARL/rs525sc_c-31-600x315w.jpg",
     "stock": 5,
-    "estado": true
+    "estado": true,
+    "categoria": "Percusion"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "precio": 1299.99,
     "imagenUrl": "https://es.yamaha.com/es/files/yas-280_1200x480_bfb813e4d5e82597817eaaa02ff2ea9b.jpg",
     "stock": 8,
-    "estado": true
+    "estado": true,
+    "categoria": "Viento"
   },
   {
     "id": 5,
@@ -42,6 +46,7 @@
     "precio": 149.99,
     "imagenUrl": "https://caswells-strings.co.uk/wp-content/uploads/2010/06/IMG_3427.jpg",
     "stock": 20,
-    "estado": true
+    "estado": false,
+    "categoria": "Cuerda"
   }
 ]
