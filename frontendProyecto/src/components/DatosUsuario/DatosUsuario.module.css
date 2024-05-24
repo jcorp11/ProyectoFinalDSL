@@ -1,0 +1,23 @@
+.datos-usuario-container {
+    padding: 0rem 0rem; /* Add padding around the component */
+  }
+
+div  .link-button {
+    background-color: #bdbdbd; /* White background */
+    color: #333; /* Dark text color for contrast */
+    border: none; /* Remove border */
+    padding: 0.5rem 1rem; /* Add padding for better spacing */
+    margin: 0.5rem 0; /* Add margin to space out buttons */
+    text-align: left; /* Align text to the left */
+    width: wrap; /* Make buttons wrap around content */
+    border-radius: 5px; /* Add slight border radius */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover and click */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+div .link-button:hover,
+div .link-button:active {
+    background-color: #bdbdbd; /* Slightly darker gray on hover */
+    color: #ffffff; /* White text on hover */
+  }
+  

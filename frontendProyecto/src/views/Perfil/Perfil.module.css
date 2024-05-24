@@ -1,0 +1,49 @@
+.espaciador{
+  padding: 0rem 8rem; /* Add padding around the component */
+}
+
+.container {
+  padding-top: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  background-color: #ffffff; 
+}
+
+.sidebar {
+  background-color: #d4edda;
+  padding: 1rem;
+  border-radius: 5px;
+  min-height: 100vh; /* Ensures the sidebar has a minimum height */
+  display: flex;
+  flex-direction: column; /* Ensures the buttons are aligned vertically */
+}
+
+.sidebar button {
+  background-color: #ffffff; /* White background */
+  color: #333; /* Dark text color for contrast */
+  border: none; /* Remove border */
+  padding: 0.5rem 1rem; /* Add padding for better spacing */
+  margin: 0.5rem 0; /* Add margin to space out buttons */
+  width: 100%; /* Make buttons full width of sidebar */
+  border-radius: 5px; /* Add slight border radius */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover and click */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.sidebar button:hover,
+.sidebar button:focus {
+  background-color: #bdbdbd; /* Slightly darker gray on hover */
+  color: #ffffff; /* White text on hover */
+}
+
+
+.content {
+  padding: 1rem;
+  border-radius: 5px;
+  min-height: 100vh; /* Ensures the content area has a minimum height */
+}
+
+h1 {
+  margin-bottom: 2rem; /* Adds some space below the title */
+}

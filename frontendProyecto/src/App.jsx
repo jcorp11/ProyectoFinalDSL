@@ -6,7 +6,7 @@ import { RegistrarPage } from "./views/RegistrarPage";
 import Navbar from "./components/Navbar";
 import Carrito from "./components/Carrito";
 import ProductProvider from "./context/ProductProvider";
-import Perfil from "./views/Perfil";
+import Perfil from "./views/Perfil/Perfil";
 import Validacion from "./components/Validacion";
 import ProductDetails from "./views/ProductDetails";
 import UserProvider from "./context/UserProvider";
