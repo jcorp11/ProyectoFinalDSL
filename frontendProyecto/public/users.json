@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "email": "juan.perez@example.com",
+    "direccion": "Calle Falsa 123, Ciudad Ejemplo, País",
+    "contrasena": "password123",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "nombre": "María",
+    "apellido": "Gómez",
+    "email": "maria.gomez@example.com",
+    "direccion": "Avenida Siempre Viva 456, Ciudad Ejemplo, País",
+    "contrasena": "contraseña456",
+    "rol": "admin"
+  },
+  {
+    "id": 3,
+    "nombre": "Carlos",
+    "apellido": "López",
+    "email": "carlos.lopez@example.com",
+    "direccion": "Boulevard del Sol 789, Ciudad Ejemplo, País",
+    "contrasena": "qwerty789",
+    "rol": "admin"
+  },
+  {
+    "id": 4,
+    "nombre": "Ana",
+    "apellido": "Martínez",
+    "email": "ana.martinez@example.com",
+    "direccion": "Camino Real 101, Ciudad Ejemplo, País",
+    "contrasena": "1234abcd",
+    "rol": "admin"
+  },
+  {
+    "id": 5,
+    "nombre": "Luis",
+    "apellido": "Fernández",
+    "email": "luis.fernandez@example.com",
+    "direccion": "Plaza Mayor 202, Ciudad Ejemplo, País",
+    "contrasena": "luispassword",
+    "rol": "admin"
+  }
+]

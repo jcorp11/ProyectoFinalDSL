@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { userContext } from "../context/UserProvider";
 
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
 
 const LoginForm = () => {
+  const { user, setUser, token, setToken, usersAll, setUsersAll } =
+    useContext(userContext);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,16 +21,29 @@ const LoginForm = () => {
     setIsLoading(true);
     setError("");
 
-    try {
-      const response = await axios.post("/login", { email, password });
-      console.log("Login successful", response.data);
-      // Handle successful login (e.g., redirect to dashboard, store token, etc.)
-    } catch (error) {
-      console.error("Error logging in", error);
-      setError("Invalid email or password");
-    } finally {
-      setIsLoading(false);
-    }
+    // try {
+    //   const response = await axios.post("/login", { email, password });
+    //   console.log("Login successful", response.data);
+    //   // Handle successful login (e.g., redirect to dashboard, store token, etc.)
+    // } catch (error) {
+    //   console.error("Error logging in", error);
+    //   setError("Invalid email or password");
+    // } finally {
+    //   setIsLoading(false);
+    // }
+    const userdummy = {
+      email: "user@example.com",
+      id: 1,
+      direccion: "Calle Falsa 123, Ciudad Ejemplo, País",
+      nombre: "Juan",
+      apellido: "Pérez",
+      rol: "admin",
+    };
+
+    setToken(true);
+    setUser(userdummy);
+
+    navigate("/");
   };
 
   return (
@@ -82,5 +100,4 @@ const LoginForm = () => {
     </div>
   );
 };
-
 export default LoginForm;
