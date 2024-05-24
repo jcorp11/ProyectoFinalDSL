@@ -17,7 +17,7 @@ const FiltroSideBar = () => {
     const min = parseFloat(minPrice);
     const max = parseFloat(maxPrice);
 
-    // const filteredProducts = axios.get(url, {
+    // const filteredProducts = await axios.get(url, {
     //   params: {
     //     minPrice: min,
     //     maxPrice: max,
