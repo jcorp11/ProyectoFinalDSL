@@ -9,28 +9,31 @@ import ProductProvider from "./context/ProductProvider";
 import Perfil from "./views/Perfil/Perfil";
 import Validacion from "./components/Validacion";
 import ProductDetails from "./views/ProductDetails";
+import UserProvider from "./context/UserProvider";
 
 function App() {
   return (
     <ProductProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrarPage />} />
-        <Route path="/cart" element={<Carrito />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/productos/:id" element={<ProductDetails />} />
+      <UserProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrarPage />} />
+          <Route path="/cart" element={<Carrito />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/productos/:id" element={<ProductDetails />} />
 
-        <Route
-          path="/perfil2"
-          element={
-            <Validacion requireRoles={"admin"}>
-              <Carrito />
-            </Validacion>
-          }
-        />
-      </Routes>
+          <Route
+            path="/perfil2"
+            element={
+              <Validacion requireRoles={"admin"}>
+                <Carrito />
+              </Validacion>
+            }
+          />
+        </Routes>
+      </UserProvider>
     </ProductProvider>
   );
 }
