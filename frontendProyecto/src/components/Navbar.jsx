@@ -57,7 +57,7 @@ const Navbar = () => {
   return (
     <nav>
       <NavLink className="icono" to="/">
-        Icono
+        KMJ-Store
       </NavLink>
       <div className="search-container">
         <input

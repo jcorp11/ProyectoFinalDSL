@@ -1,0 +1,14 @@
+.galeria-items{
+  gap: 1rem;
+}
+.row{
+  margin-top: 1rem;
+}
+.main-container{
+  display: flex;
+  min-height: 90vh;
+  gap: 2rem;
+}
+.galeria{
+  margin-top: 1rem;
+}

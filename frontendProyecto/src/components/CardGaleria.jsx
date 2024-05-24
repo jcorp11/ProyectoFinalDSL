@@ -29,7 +29,7 @@ const CardGaleria = ({producto}) => {
   }
 
   return (
-    <Card className='myCard' style={{ width: '17rem'}}>
+    <Card className='myCard' style={{ width: '17rem', backgroundColor: "#d4edda"}}>
       <Card.Img variant="top" className='imagenCard' src= {producto.imagenUrl} />
       <Card.Body className='cardTitle'>
         <Card.Title>{producto.titulo}</Card.Title>
@@ -43,10 +43,10 @@ const CardGaleria = ({producto}) => {
       <Card.Body className='priceAndButtons'>
         <h5>{formatoPrecio.format(producto.precio)}</h5>
         <div className="buttons">
-          <button onClick={setNavigate}>
+          <button className='button-verMas' onClick={setNavigate}>
             Ver Más 👀
           </button>
-          <button onClick={agregarAlCarrito}>
+          <button className='button-agregarCarrito' onClick={agregarAlCarrito}>
             Añadir 🛒
           </button>
         </div>
