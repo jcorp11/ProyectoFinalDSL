@@ -12,3 +12,16 @@
   height: 100%;
   object-fit: contain;
 }
+.list-group{
+  border: none;
+}
+.button-verMas{
+  background-color: #3cd1a9;
+  border-radius: 1rem;
+  border: solid 1px #0d5e48 ;
+}
+.button-agregarCarrito{
+  background-color: #3cd1a9;
+  border: solid 1px #0d5e48 ;
+  border-radius: 1rem;
+}
