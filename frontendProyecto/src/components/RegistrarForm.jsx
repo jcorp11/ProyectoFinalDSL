@@ -43,7 +43,7 @@ const RegistrarForm = () => {
   };
 
   return (
-    <div className="containerForm">
+    <div className="containerForm2">
       <form onSubmit={handleSubmit} className="form">
         <div className="inputGroup">
           <label htmlFor="Nombre" className="label">
