@@ -6,9 +6,9 @@ import useFetch from "../Hooks/useFetch"
 
 const ProductDetails = () => {
 
-  const [productoSeleccionado, setProductoSeleccionado] = useState([])
-  const {data, loading, error} = useFetch("/productos.json") //La ruta debe variar dependiendo del producto que se pide, la logica debe hacerse en el backend.
-  
+  const {id} = useParams();
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null)
+  const {data, loading, error} = useFetch(`http://localhost:3000/productos/${id}`); //La ruta debe variar dependiendo del producto que se pide, la logica debe hacerse en el backend.
   useEffect(() => {
     if (data) {
       setProductoSeleccionado(data[0]);
@@ -17,7 +17,9 @@ const ProductDetails = () => {
 
   return (
     <>
-      <CardVistaDetalle productoSeleccionado = {productoSeleccionado} />
+      {loading && <h1>Cargando...</h1>}
+      {error && <h1>Error al cargar el producto</h1>}
+      {productoSeleccionado && <CardVistaDetalle productoSeleccionado={productoSeleccionado} />}
     </>
   )
 }

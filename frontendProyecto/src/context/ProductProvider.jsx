@@ -6,11 +6,12 @@ import useFetch from "../Hooks/useFetch.js";
 export const productosContext = createContext();
 
 const ProductProvider = ({ children }) => {
+  const [url, setUrl] = useState("http://localhost:3000/productos")
   const [productosData, setProductosData] = useState([]);
   const [productosCarrito, setProductosCarrito] = useState([]);
   const [listaProductos, setListaProductos] = useState([]);
   const [precioTotal, setPrecioTotal] = useState(0);
-  const { data, loading, error } = useFetch("/productos.json");
+  const { data, loading, error } = useFetch(url);
   const [dataOriginal, setDataOriginal] = useState([]);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const ProductProvider = ({ children }) => {
 
     function calculoTotal(productosCarrito) {
       for (let i = 0; i < productosCarrito.length; i++) {
-        sumaTotal += productosCarrito[i].precio;
+        sumaTotal += parseInt(productosCarrito[i].precio);
       }
     }
     calculoTotal(productosCarrito);
@@ -45,6 +46,7 @@ const ProductProvider = ({ children }) => {
         loading,
         dataOriginal,
         error,
+        setUrl
       }}
     >
       {children}
