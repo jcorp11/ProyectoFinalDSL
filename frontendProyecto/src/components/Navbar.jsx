@@ -54,6 +54,7 @@ const Navbar = () => {
     return isActive ? "active" : "notActive";
   };
 
+
   return (
     <nav>
       <NavLink className="icono" to="/">
