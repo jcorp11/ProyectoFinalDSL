@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
 
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
+
+const URL = "http://localhost:3000";
 
 const RegistrarForm = () => {
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ const RegistrarForm = () => {
       return;
     }
     try {
-      const response = await axios.post("/register", {
+      const response = await axios.post(`${URL}/user/register`, {
         email,
         password,
         confirmPassword,
