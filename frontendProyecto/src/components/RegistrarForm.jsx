@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dotenv from "dotenv";
 
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
 
-const URL = "http://localhost:3000";
+const URL = import.meta.env.VITE_BASE_URL;
 
 const RegistrarForm = () => {
   const navigate = useNavigate();

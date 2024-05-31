@@ -6,6 +6,7 @@ import { userContext } from "../context/UserProvider";
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
 
+const URL = import.meta.env.VITE_BASE_URL;
 const LoginForm = () => {
   const { user, setUser, token, setToken, usersAll, setUsersAll } =
     useContext(userContext);
@@ -21,27 +22,22 @@ const LoginForm = () => {
     setIsLoading(true);
     setError("");
 
-    // try {
-    //   const response = await axios.post("/login", { email, password });
-    //   console.log("Login successful", response.data);
-    //   // Handle successful login (e.g., redirect to dashboard, store token, etc.)
-    // } catch (error) {
-    //   console.error("Error logging in", error);
-    //   setError("Invalid email or password");
-    // } finally {
-    //   setIsLoading(false);
-    // }
-    const userdummy = {
-      email: "user@example.com",
-      id: 1,
-      direccion: "Calle Falsa 123, Ciudad Ejemplo, País",
-      nombre: "Juan",
-      apellido: "Pérez",
-      rol: "admin",
-    };
+    try {
+      const response = await axios.post(`${URL}/user/login`, {
+        email,
+        password,
+      });
+      console.log("Login successful", response.data);
+      setUser(response.data.user);
+      setToken(response.data.token);
 
-    setToken(true);
-    setUser(userdummy);
+      // Handle successful login (e.g., redirect to dashboard, store token, etc.)
+    } catch (error) {
+      console.error("Error logging in", error);
+      setError("Invalid email or password");
+    } finally {
+      setIsLoading(false);
+    }
 
     navigate("/");
   };
