@@ -4,44 +4,37 @@ import { useState, useContext } from "react";
 import { productosContext } from "../../context/ProductProvider";
 import axios from "axios";
 
+const URL = import.meta.env.VITE_BASE_URL;
+
 const FiltroSideBar = () => {
-  const { productosData, setProductosData, dataOriginal, setDataOriginal } =
+  const { setProductosData, setDataOriginal, setUrl } =
     useContext(productosContext);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [isNewChecked, setIsNewChecked] = useState(false);
-  const [isUsedChecked, setIsUsedChecked] = useState(false);
+  const [isNewChecked, setIsNewChecked] = useState("");
+  const [isUsedChecked, setIsUsedChecked] = useState("");
   const [category, setCategory] = useState("");
 
-  const handleFilter = () => {
-    const min = parseFloat(minPrice);
-    const max = parseFloat(maxPrice);
-
-    // const filteredProducts = await axios.get(url, {
-    //   params: {
-    //     minPrice: min,
-    //     maxPrice: max,
-    //     isNew: isNewChecked,
-    //     isUsed: isUsedChecked,
-    //     category: category,
-    //   },
-    // });
-
-    const filteredProducts = dataOriginal.filter((item) => {
-      const price = parseFloat(item.precio);
-      const priceCondition =
-        (!isNaN(min) ? price >= min : true) &&
-        (!isNaN(max) ? price <= max : true);
-      const newCondition = isNewChecked ? item.estado : true;
-      const usedCondition = isUsedChecked ? !item.estado : true;
-      const categoryCondition = category ? item.categoria === category : true;
-      return (
-        priceCondition && newCondition && usedCondition && categoryCondition
-      );
+  const handleFilter = async () => {
+    // console.log(
+    //   { isNewChecked, isUsedChecked },
+    //   typeof isNewChecked,
+    //   typeof isUsedChecked
+    // );
+    const filteredProducts = await axios.get(`${URL}/productos/filtros`, {
+      params: {
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        isNew: isNewChecked,
+        isUsed: isUsedChecked,
+        categoria: category,
+      },
     });
 
-    // setDataOriginal(filteredProducts);
-    setProductosData(filteredProducts);
+    // setUrl(filteredProducts.data.url);
+    console.log(filteredProducts.request.responseURL);
+    setDataOriginal(filteredProducts.data.products);
+    setProductosData(filteredProducts.data.products);
   };
 
   return (
