@@ -4,9 +4,10 @@ import { useState } from "react";
 import useFetch from "../Hooks/useFetch.js";
 
 export const productosContext = createContext();
+const URL = import.meta.env.VITE_BASE_URL;
 
 const ProductProvider = ({ children }) => {
-  const [url, setUrl] = useState("http://localhost:3000/productos");
+  const [url, setUrl] = useState(`${URL}/productos`);
   const [productosData, setProductosData] = useState([]);
   const [productosCarrito, setProductosCarrito] = useState([]);
   const [listaProductos, setListaProductos] = useState([]);
