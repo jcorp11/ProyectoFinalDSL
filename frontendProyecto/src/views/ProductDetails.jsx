@@ -8,7 +8,7 @@ const ProductDetails = () => {
   const URL = import.meta.env.VITE_BASE_URL;
   const {id} = useParams();
   const [productoSeleccionado, setProductoSeleccionado] = useState(null)
-  const {data, loading, error} = useFetch(`${URL}/${id}`); //La ruta debe variar dependiendo del producto que se pide, la logica debe hacerse en el backend.
+  const {data, loading, error} = useFetch(`${URL}/productos/${id}`); //La ruta debe variar dependiendo del producto que se pide, la logica debe hacerse en el backend.
   useEffect(() => {
     if (data) {
       setProductoSeleccionado(data[0]);
