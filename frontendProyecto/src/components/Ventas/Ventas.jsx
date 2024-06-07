@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import { userContext } from "../../context/UserProvider";
-import styles from "./MisCompras.module.css"; // Importing the CSS module
+import styles from "./Ventas.module.css";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const MisCompras = () => {
+const Ventas = () => {
   const { user, token } = useContext(userContext); // Get user and token from context
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,16 +18,14 @@ const MisCompras = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        if (user && user.id && token) {
-          console.log("User ID:", user.id); // Log the user ID
-          // Ensure token is available
-          const response = await axios.get(`${URL}/pedidos/user/${user.id}`, {
+        if (token && user && user.rol === "admin") {
+          const response = await axios.get(`${URL}/pedidos`, {
             headers: {
-              Authorization: `Bearer ${token}`, // Add token to headers
+              Authorization: `Bearer ${token}`,
             },
           });
           console.log(response.data.pedidos);
-          setOrders(response.data.pedidos); // Adjust based on your API response structure
+          setOrders(response.data.pedidos);
         }
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -43,14 +41,12 @@ const MisCompras = () => {
     try {
       setDetailsLoading(true);
       if (token) {
-        // Ensure token is available
         const response = await axios.get(`${URL}/pedidos/${orderId}`, {
           headers: {
-            Authorization: `Bearer ${token}`, // Add token to headers
+            Authorization: `Bearer ${token}`,
           },
         });
-        console.log("Order Details Response:", response.data);
-        setOrderDetails(response.data); // Adjust based on your API response structure
+        setOrderDetails(response.data);
       }
     } catch (error) {
       console.error("Error fetching order details:", error);
@@ -75,12 +71,13 @@ const MisCompras = () => {
   }
 
   return (
-    <div className={styles["mis-compras-container"]}>
-      <h3>Mis Compras</h3>
+    <div className={styles["ventas-container"]}>
+      <h3>Ventas</h3>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Numero de Pedido</th>
+            <th>Order ID</th>
+            <th>Usuario</th>
             <th>Fecha</th>
             <th>Total</th>
             <th>Ver Detalle</th>
@@ -90,14 +87,12 @@ const MisCompras = () => {
           {orders.map((order) => (
             <tr key={order["ID pedido"]}>
               <td>{order["ID pedido"]}</td>
+              <td>{order.Usuario}</td>
               <td>{order.fecha}</td>
               <td>${order.total}</td>
               <td>
-                <Button
-                  className={styles.toggleButton}
-                  onClick={() => handleShowModal(order["ID pedido"])}
-                >
-                  Ver Detalle
+                <Button onClick={() => handleShowModal(order["ID pedido"])}>
+                  View Details
                 </Button>
               </td>
             </tr>
@@ -107,7 +102,7 @@ const MisCompras = () => {
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Detalles del Pedido</Modal.Title>
+          <Modal.Title>Order Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {detailsLoading ? (
@@ -116,17 +111,16 @@ const MisCompras = () => {
             <Table size="sm" striped bordered>
               <thead>
                 <tr>
-                  <th>Nombre del Producto</th>
-                  <th>Cantidad</th>
-                  <th>Precio Unitario</th>
-                  <th>SubTotal</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Subtotal</th>
                 </tr>
               </thead>
               <tbody>
                 {orderDetails.pedido.map((item) => (
                   <tr key={item["ID producto"]}>
-                    <td>{item.titulo}</td>{" "}
-                    {/* Assuming 'titulo' is the product name */}
+                    <td>{item.titulo}</td>
                     <td>{item.cantidad}</td>
                     <td>${item.precio}</td>
                     <td>${item.subtotal}</td>
@@ -148,4 +142,4 @@ const MisCompras = () => {
   );
 };
 
-export default MisCompras;
+export default Ventas;

@@ -1,127 +1,147 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Modal, ListGroup } from "react-bootstrap";
-import styles from "./DatosUsuario.module.css";
+import React, { useState, useEffect, useContext } from "react";
+import { Table, Modal, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { userContext } from "../../context/UserProvider";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DatosUsuario = () => {
-  const [userData, setUserData] = useState({ email: "", addresses: [] });
-  const [loading, setLoading] = useState(true);
-  const [showAddressModal, setShowAddressModal] = useState(false);
-  const [showEmailModal, setShowEmailModal] = useState(false);
-  const [newAddress, setNewAddress] = useState("");
-  const [newEmail, setNewEmail] = useState("");
+  const { user, token } = useContext(userContext);
+  const [userData, setUserData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    direccion: "",
+    email: "",
+  });
+
+  const URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
-    // Mock fetching user data
-    setTimeout(() => {
-      setUserData({
-        email: "user@example.com",
-        addresses: ["123 Main St"],
-      });
-      setLoading(false);
-    }, 100);
+    getUserData();
   }, []);
 
-  const handleAddAddress = () => {
-    setUserData({
-      ...userData,
-      addresses: [...userData.addresses, newAddress],
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(`${URL}/usuarios/${user.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUserData(response.data.user);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  const handleEdit = () => {
+    setShowModal(true);
+    setFormData({
+      direccion: userData.direccion,
+      email: userData.email,
     });
-    setShowAddressModal(false);
-    setNewAddress("");
   };
 
-  const handleEditEmail = () => {
-    setUserData({ ...userData, email: newEmail });
-    setShowEmailModal(false);
-    setNewEmail("");
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setFormData({
+      direccion: "",
+      email: "",
+    });
   };
 
-  if (loading) {
-    return <div className="text-center">Loading...</div>;
+  const handleSaveChanges = async () => {
+    try {
+      await axios.put(`${URL}/usuarios/${user.id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getUserData();
+      handleCloseModal();
+      toast.success("¡Tus datos se han modificado con éxito!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+
+  if (!user || user.rol === "admin") {
+    return (
+      <div>
+        <h6>Debes estar loggeado para ver tus datos :(</h6>
+      </div>
+    );
   }
 
   return (
-    <div className={styles["datos-usuario-container"]}>
-      <h3>Datos de Usuario</h3>
-      <Form>
-        <Form.Group controlId="formEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" value={userData.email} readOnly />
-          <Button
-            variant="link"
-            className={styles["link-button"]}
-            onClick={() => setShowEmailModal(true)}
-          >
-            Editar Email
-          </Button>
-        </Form.Group>
+    <div>
+      <h3>Tus Datos de Usuario</h3>
+      {userData && (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Direccion</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{userData.id}</td>
+              <td>{userData.email}</td>
+              <td>{userData.direccion}</td>
+              <td>{userData.nombre}</td>
+              <td>{userData.apellido}</td>
+              <td>
+                <Button variant="primary" onClick={handleEdit}>
+                  Editar
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      )}
 
-        <Form.Group controlId="formAddresses">
-          <Form.Label>Direcciones</Form.Label>
-          <ListGroup>
-            {userData.addresses.map((address, index) => (
-              <ListGroup.Item key={index}>{address}</ListGroup.Item>
-            ))}
-          </ListGroup>
-          <Button
-            variant="link"
-            className={styles["link-button"]}
-            onClick={() => setShowAddressModal(true)}
-          >
-            Agregar Dirección
-          </Button>
-        </Form.Group>
-      </Form>
-
-      {/* Address Modal */}
-      <Modal show={showAddressModal} onHide={() => setShowAddressModal(false)}>
+      <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title> Agregar Dirección </Modal.Title>
+          <Modal.Title>Edit Your Data</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group controlId="formNewAddress">
-            <Form.Label>Dirección Nueva</Form.Label>
-            <Form.Control
-              type="text"
-              value={newAddress}
-              onChange={(e) => setNewAddress(e.target.value)}
-            />
-          </Form.Group>
+          <Form>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Direccion</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.direccion}
+                onChange={(e) =>
+                  setFormData({ ...formData, direccion: e.target.value })
+                }
+              />
+            </Form.Group>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowAddressModal(false)}
-          >
-            Cerrar
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancelar
           </Button>
-          <Button variant="primary" onClick={handleAddAddress}>
-            Guardar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Email Modal */}
-      <Modal show={showEmailModal} onHide={() => setShowEmailModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Editar Email</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="formNewEmail">
-            <Form.Label>Nuevo Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEmailModal(false)}>
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleEditEmail}>
-            Guardar
+          <Button variant="primary" onClick={handleSaveChanges}>
+            Guardar Cambios
           </Button>
         </Modal.Footer>
       </Modal>

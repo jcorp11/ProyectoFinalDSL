@@ -1,74 +1,91 @@
-/**
- * Manejo del Estado:
- * - `formData`: Contiene los datos del formulario para crear una publicación, incluyendo el nombre del producto, precio, stock, URL de la imagen y categoría.
- *
- * Hook de Estado:
- * - Utiliza el hook `useState` para manejar el estado local de los datos del formulario.
- *
- * Manejadores de Eventos:
- * - `handleInputChange`: Maneja los cambios en los campos del formulario y actualiza el estado correspondiente.
- * - `handleSubmit`: Maneja el envío del formulario. Por ahora, solo imprime los datos en la consola.
- *
- * Renderización Condicional:
- * - Se renderiza el componente solo si el usuario es un administrador. Si no lo es, el componente no se muestra.
- *
- * Resumen:
- * Este componente `CrearPublicacion` proporciona un formulario para que los administradores creen nuevas publicaciones. Los datos del formulario se almacenan localmente y se pueden enviar a una base de datos en el backend en el futuro.
- */
-
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./CrearPublicacion.module.css";
+import { userContext } from "../../context/UserProvider"; // Import user context
+
+const URL = import.meta.env.VITE_BASE_URL;
 
 const CrearPublicacion = () => {
   const [formData, setFormData] = useState({
-    nombreProducto: "",
-    descripcion: "", // Added descripcion field to the formData state
+    titulo: "",
+    descripcion: "",
     precio: "",
     stock: "",
-    urlImagen: "",
-    categoria: "",
+    imagenUrl: "",
+    estado: true, // Default value for estado as boolean
   });
+
+  const { user, token } = useContext(userContext); // Get user from context
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "estado" ? JSON.parse(value) : value, // Parse boolean value for estado
     });
   };
 
-  const handleSubmit = () => {
-    // Here you can handle the submission of form data
-    // For now, let's just log the data
+  const handleSubmit = async () => {
+    // Log formData to the console
     console.log("Form Data:", formData);
-    toast.success("Producto agregado con éxito"); // Display success message
+
+    try {
+      const response = await fetch(`${URL}/productos/CRUD`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Log the response for debugging
+      const responseData = await response.json();
+      console.log("Response:", responseData);
+
+      if (response.ok) {
+        toast.success("Producto agregado con éxito");
+        // Clear form data after successful submission
+        setFormData({
+          titulo: "",
+          descripcion: "",
+          precio: "",
+          stock: "",
+          imagenUrl: "",
+          estado: true,
+        });
+      } else {
+        console.error("Error response data:", responseData);
+        throw new Error("Error al agregar el producto");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      toast.error("Error al agregar el producto");
+    }
   };
 
-  const isAdmin = true; // Hardcoded isAdmin to true for testing locally
+  const isAdmin = user && user.rol === "admin"; // Check if user is admin
 
   if (!isAdmin) {
-    return null; // If not admin, don't render the component
+    return <div>No tienes permisos para acceder a esta página</div>; // Render message if not admin
   }
 
   return (
     <div className={styles["crearpublicacion-container"]}>
       <h3>Crear Publicacion</h3>
       <Form>
-        <Form.Group controlId="formNombreProducto">
-          <Form.Label>Nombre del Producto</Form.Label>
+        <Form.Group controlId="formTitulo">
+          <Form.Label>Título</Form.Label>
           <Form.Control
             type="text"
-            name="nombreProducto"
-            value={formData.nombreProducto}
+            name="titulo"
+            value={formData.titulo}
             onChange={handleInputChange}
           />
         </Form.Group>
         <Form.Group controlId="formDescripcion">
-          {" "}
-          {/* Added descripcion field */}
           <Form.Label>Descripción</Form.Label>
           <Form.Control
             type="text"
@@ -99,27 +116,27 @@ const CrearPublicacion = () => {
           <Form.Label>URL de la Imagen</Form.Label>
           <Form.Control
             type="text"
-            name="urlImagen"
-            value={formData.urlImagen}
+            name="imagenUrl"
+            value={formData.imagenUrl}
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="formCategoria">
-          <Form.Label>Categoría</Form.Label>
+        <Form.Group controlId="formEstado">
+          <Form.Label>Estado</Form.Label>
           <Form.Control
-            type="text"
-            name="categoria"
-            value={formData.categoria}
+            as="select"
+            name="estado"
+            value={formData.estado}
             onChange={handleInputChange}
-          />
+          >
+            <option value="true">Disponible</option>
+            <option value="false">No Disponible</option>
+          </Form.Control>
         </Form.Group>
         <Button variant="primary" onClick={handleSubmit} className="mt-3">
-          {" "}
-          {/* Added className for margin top */}
           Confirmar
         </Button>
       </Form>
-      {/* Add ToastContainer component */}
       <ToastContainer />
     </div>
   );
