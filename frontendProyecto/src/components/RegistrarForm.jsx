@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
@@ -16,12 +18,14 @@ const RegistrarForm = () => {
   const [direccion, setDireccion] = useState("");
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     setError("");
     if (password !== confirmPassword) {
+      toast.warning("Las contraseñas no coinciden");
       setError({ ...error, msg: "Las contraseñas no coinciden" });
       return;
     }
@@ -35,8 +39,11 @@ const RegistrarForm = () => {
         direccion,
       });
       console.log("Signup successful", response.data);
+      toast.success("Signup successful");
+      
       // Handle successful login (e.g., redirect to dashboard, store token, etc.)
     } catch (error) {
+      toast.error("Error signing up");
       console.error("Error signing up", error);
       setError({ ...error, msg: "error en los datos" });
     } finally {

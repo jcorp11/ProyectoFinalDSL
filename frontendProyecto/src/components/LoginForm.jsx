@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { userContext } from "../context/UserProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 
 import axios from "axios";
 import "../assets/css/LoginFromStyle.css"; // Import the CSS file
@@ -28,11 +30,13 @@ const LoginForm = () => {
         password,
       });
       console.log("Login successful", response.data);
+      toast.success("Login successful");
       setUser(response.data.user);
       setToken(response.data.token);
 
       // Handle successful login (e.g., redirect to dashboard, store token, etc.)
     } catch (error) {
+      toast.error("failed login");
       console.error("Error logging in", error);
       setError("Invalid email or password");
     } finally {

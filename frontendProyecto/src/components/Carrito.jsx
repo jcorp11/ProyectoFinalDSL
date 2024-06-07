@@ -16,8 +16,6 @@ const Carrito = () => {
 
   if (user) {
     useEffect(() => {
-      const fecha = new Date();
-      const fechaFormateada = fecha.toLocaleString();
 
       // Eliminar objetos duplicados basados en el id
       const productosUnicos = productosCarrito.reduce((uniqueProductos, producto) => {
@@ -40,7 +38,6 @@ const Carrito = () => {
         {
           idUsuario: user.id,
           idDireccion: user.direcciones[0].id,
-          fecha: fechaFormateada,
           estadoPedido: true,
           total: precioTotal,
         },
