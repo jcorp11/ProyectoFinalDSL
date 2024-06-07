@@ -62,7 +62,7 @@ const Carrito = () => {
       const url = `${import.meta.env.VITE_BASE_URL}/carrito`; // URL a la que se enviará la solicitud POST
       try {
         const response = await axios.post(url, pedido); // Realiza la solicitud POST usando Axios
-        if (response.status === 200) {
+        if (response.status === 201) {
           toast.success(`Se acaba de realizar un pago por ${formatoPrecio.format(precioTotal)} pesos.`);
           setListaProductos([]);
           setProductosCarrito([]);
