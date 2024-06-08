@@ -11,6 +11,7 @@ const Navbar = () => {
   const { user, setUser, token, setToken } = useContext(userContext);
   const { precioTotal, dataOriginal, setProductosData } = useContext(productosContext);
   const [inputBuscador, setInputBuscador] = useState("");
+  const navigate = useNavigate();
 
   // Función de debounce
   function debounce(func, delay) {
