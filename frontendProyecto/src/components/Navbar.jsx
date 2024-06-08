@@ -5,6 +5,7 @@ import { productosContext } from "../context/ProductProvider";
 import ValidarInicioDeSesion from "./ValidarInicioDeSesion.jsx";
 import { formatoPrecio } from '../js/formatearMoneda.js';
 import { userContext } from "../context/UserProvider.jsx";
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { user, setUser, token, setToken } = useContext(userContext);
@@ -42,6 +43,7 @@ const Navbar = () => {
   const cerrarSesion = () =>{
     setToken("");
     setUser("");
+    useNavigate("/");
   }
 
   function filtrarProductos(e) {
