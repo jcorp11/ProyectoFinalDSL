@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
+import { useLocalStorage } from '../Hooks/useLocalStorage.js'
 /* import useFetch from "../Hooks/useFetch.js"; */
 
 export const userContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(false);
+  const [user, setUser] = useLocalStorage("user", null);
+  const [token, setToken] = useLocalStorage("token", false);
   const [usersAll, setUsersAll] = useState([]);
 
   // const { data, loading, error } = useFetch("/users.json");
