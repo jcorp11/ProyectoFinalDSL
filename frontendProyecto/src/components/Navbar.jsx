@@ -43,7 +43,7 @@ const Navbar = () => {
   const cerrarSesion = () =>{
     setToken("");
     setUser("");
-    useNavigate("/");
+    navigate("/");
   }
 
   function filtrarProductos(e) {
