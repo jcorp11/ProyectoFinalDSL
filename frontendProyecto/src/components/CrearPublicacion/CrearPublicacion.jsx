@@ -15,6 +15,7 @@ const CrearPublicacion = () => {
     stock: "",
     imagenUrl: "",
     estado: true, // Default value for estado as boolean
+    categoria: ""
   });
 
   const { user, token } = useContext(userContext); // Get user from context
@@ -55,6 +56,7 @@ const CrearPublicacion = () => {
           stock: "",
           imagenUrl: "",
           estado: true,
+          categoria: ""
         });
       } else {
         console.error("Error response data:", responseData);
@@ -119,6 +121,16 @@ const CrearPublicacion = () => {
             name="imagenUrl"
             value={formData.imagenUrl}
             onChange={handleInputChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formCategoria">
+          <Form.Label>Categoria</Form.Label>
+          <Form.Control
+            type="text"
+            name="categoria"
+            value={formData.categoria}
+            onChange={handleInputChange}
+            placeholder="Guitarra, Teclados, Percusion, Cuerda, Viento"
           />
         </Form.Group>
         <Form.Group controlId="formEstado">
