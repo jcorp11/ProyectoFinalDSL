@@ -83,6 +83,7 @@ const FiltroSideBar = () => {
       <label className={styles.label}>
         Category:
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Todas</option>
           {categorias.map((cat) => (
             <option key={cat.id} value={cat.categoria}>
               {cat.categoria}
