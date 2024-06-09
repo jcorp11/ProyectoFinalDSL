@@ -1,14 +1,19 @@
-.galeria-items{
+.galeria-items {
   gap: 1rem;
 }
-.row{
+.row {
   margin-top: 1rem;
 }
-.main-container{
+.main-container {
   display: flex;
   min-height: 90vh;
   gap: 2rem;
 }
-.galeria{
+.galeria {
   margin-top: 1rem;
+}
+
+.centered-message {
+  font-size: 1.5em;
+  color: #555;
 }

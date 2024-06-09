@@ -2,7 +2,7 @@ import CardGaleria from "./CardGaleria";
 import { useContext } from "react";
 import { productosContext } from "../context/ProductProvider";
 import FiltroSideBar from "./filtrosidebar/Filtrosidebar";
-import '../assets/css/galeriaStyle.css'
+import "../assets/css/galeriaStyle.css";
 
 const Galeria = () => {
   const { productosData, loading, error } = useContext(productosContext);
@@ -15,6 +15,10 @@ const Galeria = () => {
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
+        ) : productosData.length === 0 ? (
+          <p className="centered-message">
+            No se encuentran productos con ese filtro{" "}
+          </p>
         ) : (
           <div className="galeria-items row">
             {productosData.map((producto) => (
