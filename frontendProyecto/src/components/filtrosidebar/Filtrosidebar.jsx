@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Filtrosidebar.module.css";
 import { useState, useContext } from "react";
 import { productosContext } from "../../context/ProductProvider";
 import axios from "axios";
 
 const URL = import.meta.env.VITE_BASE_URL;
+// const URL = "http://localhost:3000";
 
 const FiltroSideBar = () => {
   const { setProductosData, setDataOriginal, setUrl } =
@@ -14,13 +15,18 @@ const FiltroSideBar = () => {
   const [isNewChecked, setIsNewChecked] = useState("");
   const [isUsedChecked, setIsUsedChecked] = useState("");
   const [category, setCategory] = useState("");
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    const getCategorias = async () => {
+      const res = await axios.get(`${URL}/productos/categorias`);
+      // console.log(res.data.categories);
+      setCategorias(res.data.categories);
+    };
+    getCategorias();
+  }, []);
 
   const handleFilter = async () => {
-    // console.log(
-    //   { isNewChecked, isUsedChecked },
-    //   typeof isNewChecked,
-    //   typeof isUsedChecked
-    // );
     const filteredProducts = await axios.get(`${URL}/productos/filtros`, {
       params: {
         minPrice: minPrice,
@@ -76,11 +82,11 @@ const FiltroSideBar = () => {
       <label className={styles.label}>
         Category:
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">All</option>
-          <option value="Guitarra">Guitarra</option>
-          <option value="Teclados">Teclados</option>
-          <option value="Percusion">Percusión</option>
-          <option value="Cuerda">Cuerda</option>
+          {categorias.map((cat) => (
+            <option key={cat.id} value={cat.categoria}>
+              {cat.categoria}
+            </option>
+          ))}
         </select>
       </label>
       <button className={styles.btnFilter} onClick={handleFilter}>
