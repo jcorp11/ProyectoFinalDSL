@@ -8,8 +8,7 @@ const URL = import.meta.env.VITE_BASE_URL;
 // const URL = "http://localhost:3000";
 
 const FiltroSideBar = () => {
-  const { setProductosData, setDataOriginal, setUrl } =
-    useContext(productosContext);
+  const { setProductosData, setDataOriginal } = useContext(productosContext);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [isNewChecked, setIsNewChecked] = useState("");
@@ -38,9 +37,11 @@ const FiltroSideBar = () => {
     });
 
     // setUrl(filteredProducts.data.url);
-    console.log(filteredProducts.request.responseURL);
+    // console.log(filteredProducts.request.responseURL);
     setDataOriginal(filteredProducts.data.products);
     setProductosData(filteredProducts.data.products);
+
+    console.log(filteredProducts.data.products);
   };
 
   return (
